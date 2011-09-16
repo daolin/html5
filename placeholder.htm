@@ -1,0 +1,108 @@
+<!doctype html>
+<head>
+<script src="http://a.tbcdn.cn/s/kissy/1.1.6/kissy-min.js"></script>
+<script src="placeholder.js"></script>
+
+<style>
+	.placeholder {color: #ccc;}
+</style>
+</head>
+<body>
+
+<h1>html5 placeholder 测试</h1>
+
+<hr><br/>
+引入方式： 在页头中引入 placeholder.js 即可
+<hr><br/>
+
+input
+	<ul>
+		<li>最简单的: <input type="text" placeholder="请输入关键字">
+		<li>有原始数据的:	<input type="text" placeholder="请输入关键字" value="关键字">
+		<li>文字相同时:	<input type="text" placeholder="请输入关键字" value="请输入关键字">
+	</ul>
+
+<hr><br/>
+
+textarea: 
+	<ul>
+		<li>最简单的: <textarea placeholder="请输入关键字"></textarea>
+		<li>有原始数据的:	<textarea placeholder="请输入关键字">关键字</textarea>
+		<li>文字相同时:	<textarea placeholder="请输入关键字">请输入关键字</textarea>
+	</ul>
+
+<hr><br/>
+
+表单模拟:
+	<form>
+		<input type="text" name="q" placeholder="请输入关键字"><input type="submit">
+	</form>
+	表单返回值是:  [<script>document.write(location.search.replace(/\?q=(.*)/, '$1'))</script>]
+
+	<p>当不输入文字直接回车时，应该返回空</p>
+
+
+<hr><br/>
+
+
+动态表单模拟:
+	
+	<ul>
+		<li>
+			直接动态生成
+			<script>
+				document.write('<input type="text" placeholder="请输入关键字">');
+			</script>
+		</li>
+
+		<li>
+			延迟1秒动态生成, 自动加placeholder  <span id="J_Container1"></span>
+			<script>
+				KISSY.later(function(){
+					KISSY.DOM.html('#J_Container1', '<input id="J_Input1" type="text" placeholder="请输入关键字">');
+					KISSY.placeholder('#J_Input1');
+				}, 1000);
+			</script>
+		</li>
+
+		
+		<li>
+			延迟1秒动态生成, 手动加placeholder  <span id="J_Container2"></span>
+			<script>
+				KISSY.later(function(){
+					KISSY.DOM.html('#J_Container2', '<input id="J_Input2" type="text" placeholder="请输入关键字">');
+				}, 1000);
+			</script>
+			<input type="button" value="加入支持" onclick="javascript:placeholder('#J_Input2');">
+		</li>
+	</ul>
+
+
+<hr><br/>
+
+
+表单修改表单  (很难实现，未兼容) :
+	<ul>
+		<li><input type="text" id="J_Input3" placeholder="请输入关键字">
+		<li><input type="text" id="J_Input4" placeholder="请输入关键字" value="这里将修改成空">
+		<li><input type="text" id="J_Input5" placeholder="请输入关键字" value="">   （这里将输入同样的文字）
+	</ul>	
+
+	<input type="button" value="点击后修改" onclick="modify()">
+
+	<script>
+		
+		var S = KISSY, D = S.DOM, E = S.Event;
+
+		function modify(){
+			D.get('#J_Input3').value='关键字';
+			D.get('#J_Input4').value='';
+			D.get('#J_Input5').value='修改为同样的关键字';
+		}
+	</script>
+
+
+<hr><br/>
+
+</body>
+
